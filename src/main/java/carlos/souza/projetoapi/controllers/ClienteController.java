@@ -1,16 +1,18 @@
 package carlos.souza.projetoapi.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,27 +24,18 @@ import carlos.souza.projetoapi.repositories.ClienteRepository;
 
 @RestController
 @RequestMapping("/api/cliente")
+@CrossOrigin("http://localhost:4200")
 public class ClienteController {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	@GetMapping(path = "/teste")
-	public List<Cliente> teste() {
-		Cliente cli = new Cliente("Carlos", "37638285832");
-		Cliente cli2 = new Cliente("Carlos", "37638285832");
-		
-		List<Cliente> clientes = new ArrayList<>();
-		
-		clientes.add(cli);
-		clientes.add(cli2);
-		return clientes;
-	}
 	
 	@PostMapping(path = "/save")
-	public Cliente save(@RequestParam String nome, @RequestParam String cpf) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public Cliente save(@RequestBody @Valid Cliente cliente) {
 		
-		return clienteRepository.save(new Cliente(nome, cpf));		
+		return clienteRepository.save(new Cliente(cliente.getNome(), cliente.getCpf()));		
 	}
 	
 	@GetMapping(path = "/search/id={id}")
@@ -59,7 +52,7 @@ public class ClienteController {
 	
 	@PutMapping("/update/id={id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable(name="id") Integer id, Cliente cliente){
+	public void update(@PathVariable(name="id") Integer id,@RequestBody Cliente cliente){
 		
 		clienteRepository.findById(id)
 			.map( c -> {

@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.istack.NotNull;
 
 
 @Entity
@@ -19,14 +19,15 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int id;
 	
-	@NotNull
+	@NotBlank(message = "Nome é obrigatório")
+	@Column(nullable = false, length = 10)
 	public String nome;
 	
-	@NotNull
-	@Column(length = 14)
+	@NotBlank(message = "CPF é obrigatório")
+	@Column(nullable = false, length = 14)
 	public String cpf;
 	
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "data_cadastro", updatable = false)
 	public LocalDate dataCadastro;
 	
