@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -52,7 +51,7 @@ public class ClienteController {
 	
 	@PutMapping("/update/id={id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable(name="id") Integer id,@RequestBody Cliente cliente){
+	public void update(@PathVariable(name="id") Integer id,@RequestBody @Valid Cliente cliente){
 		
 		clienteRepository.findById(id)
 			.map( c -> {

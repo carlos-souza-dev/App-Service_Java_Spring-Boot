@@ -7,5 +7,6 @@ import carlos.souza.projetoapi.module.Cliente;
 
 @Repository
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, Integer> {
+    
 
 }

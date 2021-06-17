@@ -1,5 +1,6 @@
 package carlos.souza.projetoapi.module;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ public class Servico {
 	private String descricao;
 	
 	@Column
-	private double preco;	
+	private BigDecimal preco;	
 	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
@@ -35,11 +36,15 @@ public class Servico {
 	private LocalDate data;
 	
 
-	public Servico( String descricao, double preco) {
+	public Servico( String descricao, BigDecimal preco) {
 		super();
 		this.preco = preco;
 		this.descricao = descricao;
 		this.data = LocalDate.now();
+	}
+	
+	public Servico () {
+		
 	}
 
 
@@ -63,12 +68,12 @@ public class Servico {
 	}
 
 
-	public double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
 
-	public void setPreco(double preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
