@@ -2,12 +2,7 @@ package carlos.souza.projetoapi.controllers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +19,7 @@ import carlos.souza.projetoapi.module.Cliente;
 import carlos.souza.projetoapi.module.Servico;
 import carlos.souza.projetoapi.repositories.ClienteRepository;
 import carlos.souza.projetoapi.repositories.ServicoRepository;
-import carlos.souza.projetoapi.util.BigDecimalConverter;
+import carlos.souza.projetoapi.util.BigDecimalConvert;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,7 +29,7 @@ public class ServicoController {
 
 	private final ClienteRepository clienteRepository;
 	private final ServicoRepository servicoRepository;
-	private final BigDecimalConverter decimalConverter;
+	private final BigDecimalConvert decimalConverter;
 	
 	@GetMapping("/teste")
 	public String teste() {
